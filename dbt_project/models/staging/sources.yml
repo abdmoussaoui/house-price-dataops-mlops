@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: raw_data
+    schema: raw_data
+
+    tables:
+      - name: houses
+        description: "Données immobilières brutes chargées par dlt."

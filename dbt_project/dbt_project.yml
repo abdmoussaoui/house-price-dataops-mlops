@@ -1,0 +1,15 @@
+name: "mini_house_mlops"
+version: "1.0.0"
+config-version: 2
+
+profile: "mini_house_mlops"
+
+model-paths: ["models"]
+test-paths: ["tests"]
+
+models:
+  mini_house_mlops:
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table

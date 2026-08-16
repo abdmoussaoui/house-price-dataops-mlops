@@ -66,4 +66,61 @@ print("Prix minimum :", statistics[1])
 print("Prix maximum :", statistics[2])
 
 
+# ajouté  : apres la creation de marts pour machine learning :
+
+
+
+mart = connection.execute("""
+    SELECT *
+FROM analytics.ml_houses
+LIMIT 5
+""").fetchall()
+
+print("Mart :")
+
+for el in mart:
+    print(el)
+    
+    
+# verification apres staging et marts
+
+import duckdb
+
+
+connection = duckdb.connect("warehouse/house_prices.duckdb")
+
+
+print("\n--- RAW ---")
+
+print(
+    connection.execute("""
+        SELECT COUNT(*)
+        FROM raw_data.houses
+    """).fetchone()
+)
+
+
+print("\n--- STAGING ---")
+
+print(
+    connection.execute("""
+        SELECT COUNT(*)
+        FROM analytics.stg_houses
+    """).fetchone()
+)
+
+
+print("\n--- ML DATA ---")
+
+rows = connection.execute("""
+    SELECT *
+    FROM analytics.ml_houses
+    LIMIT 5
+""").fetchall()
+
+for row in rows:
+    print(row)
+
+
 connection.close()
+

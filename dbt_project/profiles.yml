@@ -1,0 +1,11 @@
+mini_house_mlops:
+
+  target: dev
+
+  outputs:
+
+    dev:
+      type: duckdb
+      path: ../warehouse/house_prices.duckdb
+      schema: analytics
+      threads: 1
