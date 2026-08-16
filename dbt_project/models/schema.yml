@@ -7,37 +7,81 @@ models:
 
     columns:
 
+      - name: house_id
+        data_tests:
+          - not_null
+          - unique
+
       - name: surface
-        description: "Surface du logement en mètres carrés."
         data_tests:
           - not_null
 
       - name: rooms
-        description: "Nombre de pièces."
         data_tests:
           - not_null
 
       - name: age
-        description: "Âge du logement."
         data_tests:
           - not_null
 
       - name: distance_city
-        description: "Distance par rapport au centre-ville."
         data_tests:
           - not_null
 
       - name: price
-        description: "Prix du logement."
         data_tests:
           - not_null
 
 
   - name: ml_houses
-    description: "Dataset préparé pour les prochaines étapes Machine Learning."
+
+    description: "Dataset préparé pour le Machine Learning."
+
+    config:
+      contract:
+        enforced: true
 
     columns:
 
+      - name: house_id
+        data_type: BIGINT
+        description: "Identifiant du logement."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: surface
+        data_type: DOUBLE
+        description: "Surface en mètres carrés."
+        data_tests:
+          - not_null
+
+      - name: rooms
+        data_type: BIGINT
+        description: "Nombre de pièces."
+        data_tests:
+          - not_null
+
+      - name: age
+        data_type: BIGINT
+        description: "Âge du logement."
+        data_tests:
+          - not_null
+
+      - name: distance_city
+        data_type: DOUBLE
+        description: "Distance au centre-ville."
+        data_tests:
+          - not_null
+
       - name: price
+        data_type: DOUBLE
+        description: "Prix du logement."
+        data_tests:
+          - not_null
+
+      - name: price_per_m2
+        data_type: DOUBLE
+        description: "Prix calculé par mètre carré."
         data_tests:
           - not_null

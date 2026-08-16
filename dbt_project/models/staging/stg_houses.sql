@@ -1,9 +1,13 @@
 select
+    house_id,
     surface,
     rooms,
     age,
     distance_city,
-    price
+   -- ajouté par akm
+    price / nullif(surface, 0) as price_per_m2 ,
+    price,
+    ingested_at
 
 from {{ source('raw_data', 'houses') }}
 
