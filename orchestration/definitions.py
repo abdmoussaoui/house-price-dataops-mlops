@@ -174,10 +174,21 @@ def house_data_pipeline():
     test_dbt_models(
         dbt_models
     )
+    
+    
+daily_house_schedule = dg.ScheduleDefinition(
+    name="daily_house_pipeline",
+    job=house_data_pipeline,
+    cron_schedule="0 8 * * *",
+    execution_timezone="Africa/Casablanca",
+)
 
 
 defs = dg.Definitions(
     jobs=[
         house_data_pipeline,
-    ]
+    ],
+    schedules=[
+        daily_house_schedule,
+    ],
 )
