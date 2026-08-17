@@ -69,6 +69,26 @@ print("Prix maximum :", statistics[2])
 # ajouté  : apres la creation de marts pour machine learning :
 
 
+print("\n--- STRUCTURE DE analytics.stg_houses ---")
+
+columnss = connection.execute("""
+    DESCRIBE analytics.stg_houses
+""").fetchall()
+
+for column in columnss:
+    print(column)
+    
+    
+    
+
+print("\n--- STRUCTURE DE analytics.ml_houses ---")
+
+columnss = connection.execute("""
+    DESCRIBE analytics.ml_houses
+""").fetchall()
+
+for column in columnss:
+    print(column)
 
 mart = connection.execute("""
     SELECT *

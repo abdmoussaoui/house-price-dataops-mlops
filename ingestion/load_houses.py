@@ -1,4 +1,5 @@
 import csv
+from datetime import datetime, timezone
 from pathlib import Path
 
 import dlt
@@ -9,16 +10,23 @@ DATABASE_PATH = "warehouse/house_prices.duckdb"
 
 
 def read_houses():
+
+    ingestion_time = datetime.now(timezone.utc)
+
     with CSV_PATH.open("r", encoding="utf-8", newline="") as file:
+
         reader = csv.DictReader(file)
 
-        for row in reader:
+        for house_id, row in enumerate(reader, start=1):
+
             yield {
+                "house_id": house_id,
                 "surface": float(row["surface"]),
                 "rooms": int(row["rooms"]),
                 "age": int(row["age"]),
                 "distance_city": float(row["distance_city"]),
                 "price": float(row["price"]),
+                "ingested_at": ingestion_time,
             }
 
 
