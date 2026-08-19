@@ -1,3 +1,4 @@
+import os
 from contextlib import asynccontextmanager
 
 import mlflow
@@ -8,7 +9,13 @@ from fastapi import FastAPI
 from pydantic import BaseModel, Field
 
 
-TRACKING_URI = "http://127.0.0.1:5000"
+# TRACKING_URI = "http://127.0.0.1:5000"
+
+TRACKING_URI = os.getenv(
+    "MLFLOW_TRACKING_URI",
+    "http://127.0.0.1:5000",
+)
+
 
 MODEL_NAME = "HousePriceModel"
 
